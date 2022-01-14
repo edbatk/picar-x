@@ -1,5 +1,6 @@
 import sys
 sys.path.append(r'/home/ryan/picar-x/lib')
+sys.path.append(r'/home/ryan/Documents/picar-x/lib')
 from utils import reset_mcu
 reset_mcu()
 
