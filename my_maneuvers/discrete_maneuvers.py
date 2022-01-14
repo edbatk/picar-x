@@ -25,11 +25,11 @@ if __name__ == "__main__":
         px = Picarx()
         time.sleep(1.0)
         linear_movements(px, 20, 0, 3.0)
-        time.sleep(px, -20, 0, 2.0)
+        time.sleep(1.0)
+        linear_movements(px, -20, 0, 2.0)
         time.sleep(1.0)
         linear_movements(px, 15, -25, 1.0)
-        time.sleep(1.0)
-        
+          
         
     finally:
         px.forward(0)
