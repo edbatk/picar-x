@@ -1,6 +1,7 @@
 # from ezblock import Servo,PWM,fileDB,Pin,ADC
 import logging
 import time
+import atexit
 try:
     from ezblock import *
     from ezblock import __reset_mcu__
@@ -10,10 +11,10 @@ except ImportError:
     print ("This computer does not appear to be a PiCar -X system (ezblock is not present). Shadowing hardware calls with substitute functions ")
     from sim_ezblock import *
 
-logging_format = "%( asctime)s: %( message)s"
-logging.basicConfig(format=logging_format , level=logging.INFO ,
-                    datefmt ="%H:%M:%S")
-logging.getLogger ().setLevel(logging.DEBUG)
+# logging_format = "%( asctime)s: %( message)s"
+# logging.basicConfig(format=logging_format , level=logging.INFO ,
+#                     datefmt ="%H:%M:%S")
+# logging.getLogger ().setLevel(logging.DEBUG)
 
 class Picarx(object):
     PERIOD = 4095
@@ -187,6 +188,9 @@ class Picarx(object):
     def stop(self):
         self.set_motor_speed(1, 0)
         self.set_motor_speed(2, 0)
+        
+    def goodbye():
+        print('Good Bye.')
 
 
     def Get_distance(self):
@@ -221,6 +225,8 @@ if __name__ == "__main__":
     px.forward(50)
     time.sleep(1)
     px.stop()
+    atexit.register(px.stop())
+    atexit.register(px.goodbye())
     # set_dir_servo_angle(0)
     # time.sleep(1)
     # self.set_motor_speed(1, 1)
