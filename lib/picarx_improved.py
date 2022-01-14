@@ -164,10 +164,13 @@ class Picarx(object):
         
     def power_scale(self):
         curr_angle = abs(math.radians(self.dir_current_angle))
+        print(curr_angle)
         length = 96 # [mm]
         width = 110 # [mm]
         scaling = ((length - width/2 * math.tan(curr_angle)) / 
                   (length + width/2 * math.tan(curr_angle)))
+        print(f'Scaling: {scaling}')
+        return scaling
 
     def backward(self,speed):
         current_angle = self.dir_current_angle
@@ -195,6 +198,7 @@ class Picarx(object):
             if abs_current_angle > 40:
                 abs_current_angle = 40
             power_scale = self.power_scale()
+            print(f'power_scale: {power_scale}')
             if (current_angle / abs_current_angle) > 0:
                 self.set_motor_speed(1, speed)
                 self.set_motor_speed(2, -1*speed * power_scale)
@@ -245,6 +249,12 @@ if __name__ == "__main__":
     px.forward(50)
     time.sleep(1)
     px.stop()
+    
+    time.sleep(2.0)
+    px.set_dir_servo_angle(-5)
+    time.sleep(3.0)
+    px.forward(25)
+    time.sleep(3.0)
     
     # set_dir_servo_angle(0)
     # time.sleep(1)
