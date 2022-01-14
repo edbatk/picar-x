@@ -7,7 +7,8 @@ reset_mcu()
 from picarx_improved import Picarx
 import time
 
-
+def linear_movements(px, speed, angle, duration):
+    px.set_dir_servo_angle(-2)
 
 
 if __name__ == "__main__":

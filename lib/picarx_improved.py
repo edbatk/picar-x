@@ -247,7 +247,7 @@ class Picarx(object):
 if __name__ == "__main__":
     px = Picarx() 
     time.sleep(2.0)
-    set_dir_servo_angle(-2)
+    px.set_dir_servo_angle(-2)
 
     # time.sleep(3.0)
     # px.forward(25)
