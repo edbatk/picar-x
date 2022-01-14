@@ -9,6 +9,8 @@ import time
 if __name__ == "__main__":
     try:
         px = Picarx()
+        time.sleep(2.0)
+        px.set_dir_servo_angle(0)
         time.sleep(3.0)
         px.forward(25)
         time.sleep(3.0)
