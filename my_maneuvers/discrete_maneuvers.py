@@ -24,17 +24,19 @@ def parallel_park(px, side):
     if side == 'left':
         linear_movements(px, -7.5, -25, 0.5)
         linear_movements(px, -7.5, 25, 0.5)
-        linear_movements(px, 5, 0, 0.25)
+        linear_movements(px, 7.5, 0, 0.5)
     elif side == 'right':
-        linear_movements(px, -7.5, 25, 1.0)
-        linear_movements(px, 7.5, -50, 0.25)
-        linear_movements(px, 5, 0, 0.25)
+        linear_movements(px, -7.5, 25, 0.5)
+        linear_movements(px, -7.5, -25, 0.5)
+        linear_movements(px, 7.5, 0, 0.5)
         
 if __name__ == "__main__":
     try:
         px = Picarx()
         time.sleep(1.0)
         parallel_park(px,'left')
+        time.sleep(1.0)
+        parallel_park(px,'right')
           
         
     finally:
