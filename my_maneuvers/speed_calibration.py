@@ -9,7 +9,8 @@ import time
 if __name__ == "__main__":
     try:
         px = Picarx()
-        px.forward(10)
+        time.sleep(3.0)
+        px.forward(25)
         time.sleep(3.0)
         
     finally:
