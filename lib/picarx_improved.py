@@ -2,6 +2,8 @@
 import logging
 import time
 import atexit
+import math
+
 try:
     from ezblock import *
     from ezblock import __reset_mcu__
@@ -22,6 +24,8 @@ class Picarx(object):
     TIMEOUT = 0.02
 
     def __init__(self):
+        atexit.register(px.stop())
+        atexit.register(px.goodbye())
         self.dir_servo_pin = Servo(PWM('P2'))
         self.camera_servo_pin1 = Servo(PWM('P0'))
         self.camera_servo_pin2 = Servo(PWM('P1'))
@@ -93,7 +97,6 @@ class Picarx(object):
             self.cali_dir_value[motor] = -1 * self.cali_dir_value[motor]
         self.config_flie.set("picarx_dir_motor", self.cali_dir_value)
 
-
     def dir_servo_angle_calibration(self,value):
         # global dir_cal_value
         self.dir_cal_value = value
@@ -145,7 +148,14 @@ class Picarx(object):
 
     def set_power(self,speed):
         self.set_motor_speed(1, speed)
-        self.set_motor_speed(2, speed) 
+        self.set_motor_speed(2, speed)
+        
+    def power_scale(self):
+        curr_angle = abs(math.radians(self.dir_current_angle))
+        length = 96 # [mm]
+        width = 110 # [mm]
+        scaling = ((length - width/2 * math.tan(curr_angle)) / 
+                  (length + width/2 * math.tan(curr_angle)))
 
     def backward(self,speed):
         current_angle = self.dir_current_angle
@@ -154,8 +164,7 @@ class Picarx(object):
             # if abs_current_angle >= 0:
             if abs_current_angle > 40:
                 abs_current_angle = 40
-            power_scale = (100 - abs_current_angle) / 100.0 
-            print("power_scale:",power_scale)
+            power_scale = self.power_scale()
             if (current_angle / abs_current_angle) > 0:
                 self.set_motor_speed(1, -1*speed)
                 self.set_motor_speed(2, speed * power_scale)
@@ -173,8 +182,7 @@ class Picarx(object):
             # if abs_current_angle >= 0:
             if abs_current_angle > 40:
                 abs_current_angle = 40
-            power_scale = (100 - abs_current_angle) / 100.0 
-            print("power_scale:",power_scale)
+            power_scale = self.power_scale()
             if (current_angle / abs_current_angle) > 0:
                 self.set_motor_speed(1, speed)
                 self.set_motor_speed(2, -1*speed * power_scale)
@@ -225,8 +233,7 @@ if __name__ == "__main__":
     px.forward(50)
     time.sleep(1)
     px.stop()
-    atexit.register(px.stop())
-    atexit.register(px.goodbye())
+    
     # set_dir_servo_angle(0)
     # time.sleep(1)
     # self.set_motor_speed(1, 1)
