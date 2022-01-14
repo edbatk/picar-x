@@ -23,12 +23,12 @@ def parallel_park(px, side):
     px.set_dir_servo_angle(0)
     if side == 'left':
         linear_movements(px, -7.5, -25, 0.5)
-        linear_movements(px, -7.5, 25, 0.5)
+        linear_movements(px, -7.5, 25, 0.4)
         px.set_dir_servo_angle(0)
         linear_movements(px, 7.5, 0, 0.5)
     elif side == 'right':
         linear_movements(px, -7.5, 25, 0.5)
-        linear_movements(px, -7.5, -25, 0.5)
+        linear_movements(px, -7.5, -25, 0.4)
         px.set_dir_servo_angle(0)
         linear_movements(px, 7.5, 0, 0.5)
         
