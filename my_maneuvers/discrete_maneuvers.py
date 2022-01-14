@@ -10,7 +10,7 @@ import time
 def linear_movements(px, speed, angle, duration):
     px.stop()
     px.set_dir_servo_angle(angle)
-    time.sleep(0.1)
+    time.sleep(1.0)
     if speed >= 0:
         px.forward(speed)
     else:
