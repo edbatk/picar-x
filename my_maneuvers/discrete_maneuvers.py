@@ -40,6 +40,7 @@ def k_turn(px, side):
         linear_movements(px, -7.5, 25, 0.4)
         linear_movements(px, 7.5, -25, 0.4)
         linear_movements(px, 7.5, 0, 0.4)
+        px.set_dir_servo_angle(0)
         
 if __name__ == "__main__":
     try:
