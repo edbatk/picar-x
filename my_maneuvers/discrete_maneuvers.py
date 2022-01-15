@@ -22,15 +22,15 @@ def parallel_park(px, side):
     time.sleep(1.0)
     px.set_dir_servo_angle(0)
     if side == 'left':
-        linear_movements(px, -7.5, -25, 0.4)
-        linear_movements(px, -7.5, 25, 0.4)
+        linear_movements(px, -7.5, -25, 0.75)
+        linear_movements(px, -7.5, 25, 0.75)
         px.set_dir_servo_angle(0)
-        linear_movements(px, 7.5, 0, 0.5)
+        linear_movements(px, 7.5, 0, 1.0)
     elif side == 'right':
-        linear_movements(px, -7.5, 25, 0.4)
-        linear_movements(px, -7.5, -25, 0.4)
+        linear_movements(px, -7.5, 25, 0.75)
+        linear_movements(px, -7.5, -25, 0.65)
         px.set_dir_servo_angle(0)
-        linear_movements(px, 7.5, 0, 0.5)
+        linear_movements(px, 7.5, 0, 1.0)
         
 def k_turn(px, side):
     time.sleep(1.0)
@@ -38,7 +38,13 @@ def k_turn(px, side):
     if side == 'left':
         linear_movements(px, 7.5, 25, 1.25)
         linear_movements(px, -7.5, -25, 1.25)
-        linear_movements(px, 7.5, 25, 1.25)
+        linear_movements(px, 7.5, 25, 1.5)
+        px.set_dir_servo_angle(0)
+        linear_movements(px, 7.5, 0, 1.0)
+    if side == 'right':
+        linear_movements(px, -7.5, 25, 1.25)
+        linear_movements(px, 7.5, -25, 1.25)
+        linear_movements(px, 7.5, 25, 1.5)
         px.set_dir_servo_angle(0)
         linear_movements(px, 7.5, 0, 1.0)
         
@@ -59,7 +65,7 @@ if __name__ == "__main__":
             continue
         elif curr_move == 'linear':
             speed = float(input('Please enter a desired speed (-ve for backwards) '))
-            angle = float(input('Please enter a desired turning angle' ))
+            angle = float(input('Please enter a desired turning angle '))
             duration = float(input('Please enter a desired duration '))
             linear_movements(px, speed, angle, duration)
         elif curr_move == 'parallel-park':
