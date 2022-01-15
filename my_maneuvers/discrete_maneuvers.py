@@ -32,13 +32,21 @@ def parallel_park(px, side):
         px.set_dir_servo_angle(0)
         linear_movements(px, 7.5, 0, 0.5)
         
+def k_turn(px, side):
+    time.sleep(1.0)
+    px.set_dir_servo_angle(0)
+    if side == 'left':
+        linear_movements(px, 7.5, 25, 0.4)
+        linear_movements(px, -7.5, 25, 0.4)
+        linear_movements(px, 7.5, -25, 0.4)
+        linear_movements(px, 7.5, 0, 0.4)
+        
 if __name__ == "__main__":
     try:
         px = Picarx()
         time.sleep(1.0)
-        parallel_park(px,'left')
-        time.sleep(1.0)
-        parallel_park(px,'right')
+        k_turn(px,'left')
+        
           
         
     finally:
