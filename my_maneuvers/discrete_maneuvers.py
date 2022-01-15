@@ -59,7 +59,7 @@ if __name__ == "__main__":
             continue
         elif curr_move == 'linear':
             speed = float(input('Please enter a desired speed (-ve for backwards) '))
-            angle = float(input('Please enter a desired turning angle ))
+            angle = float(input('Please enter a desired turning angle' ))
             duration = float(input('Please enter a desired duration '))
             linear_movements(px, speed, angle, duration)
         elif curr_move == 'parallel-park':
