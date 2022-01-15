@@ -3,32 +3,31 @@ import logging
 import time
 import atexit
 import math
-# from logdecorator import log_on_start, log_on_end, log_on_error
-
-try:
-    from servo import Servo
-    from pwm import PWM
-    from pin import Pin
-    from adc import ADC
-    from filedb import fileDB
-    from utils import reset_mcu
-    reset_mcu()
-    time.sleep (0.01)
+from logdecorator import log_on_start, log_on_end, log_on_error
 
 # try:
-#     from ezblock import *
-#     from ezblock import __reset_mcu__
-#     __reset_mcu__ ()
-#     time.sleep (0.01)    
+#     from servo import Servo
+#     from pwm import PWM
+#     from pin import Pin
+#     from adc import ADC
+#     from filedb import fileDB
+#     from utils import reset_mcu
+#     reset_mcu()
+#     time.sleep (0.01)
+
+try:
+    from ezblock import *
+    from ezblock import __reset_mcu__
+    __reset_mcu__ ()
+    time.sleep (0.01)    
 
 except ImportError:
     print ("This computer does not appear to be a PiCar -X system (ezblock is not present). Shadowing hardware calls with substitute functions ")
     from sim_ezblock import *
 
-# logging_format = "%( asctime)s: %( message)s"
-# logging.basicConfig(format=logging_format , level=logging.INFO ,
-#                     datefmt ="%H:%M:%S")
-# logging.getLogger ().setLevel(logging.DEBUG)
+logging_format = "%(asctime)s: %(message)s"
+logging.basicConfig(format=logging_format, level=logging.INFO, datefmt="%H:%M:%S")
+logging.getLogger().setLevel(logging.DEBUG)
 
 class Picarx(object):
     PERIOD = 4095
@@ -36,8 +35,7 @@ class Picarx(object):
     TIMEOUT = 0.02
 
     def __init__(self):
-        # atexit.register(px.stop())
-        # atexit.register(px.goodbye())
+        atexit.register(self.cleanup)
         self.dir_servo_pin = Servo(PWM('P2'))
         self.camera_servo_pin1 = Servo(PWM('P0'))
         self.camera_servo_pin2 = Servo(PWM('P1'))
@@ -69,7 +67,6 @@ class Picarx(object):
         for pin in self.motor_speed_pins:
             pin.period(self.PERIOD)
             pin.prescaler(self.PRESCALER)
-
 
 
     def set_motor_speed(self,motor,speed):
@@ -213,8 +210,8 @@ class Picarx(object):
         self.set_motor_speed(1, 0)
         self.set_motor_speed(2, 0)
         
-    def goodbye():
-        print('Good Bye.')
+    def cleanup(self):
+        self.stop()
 
 
     def Get_distance(self):
