@@ -23,26 +23,26 @@ def parallel_park(px, side):
     px.set_dir_servo_angle(0)
     if side == 'left':
         linear_movements(px, -7.5, -25, 0.75)
-        linear_movements(px, -7.5, 25, 1.1)
+        linear_movements(px, -7.5, 25, 0.95)
         linear_movements(px, 7.5, 0, 1.0)
     elif side == 'right':
         linear_movements(px, -7.5, 25, 0.75)
-        linear_movements(px, -7.5, -25, 1.1)
+        linear_movements(px, -7.5, -25, 0.95)
         linear_movements(px, 7.5, 0, 1.0)
         
 def k_turn(px, side):
     time.sleep(1.0)
     px.set_dir_servo_angle(0)
-    if side == 'left':
+    if side == 'right':
         linear_movements(px, 7.5, 25, 1.25)
         linear_movements(px, -7.5, -25, 1.25)
-        linear_movements(px, 7.5, 25, 1.5)
+        linear_movements(px, 7.5, 25, 1.35)
         px.set_dir_servo_angle(0)
         linear_movements(px, 7.5, 0, 1.0)
-    if side == 'right':
+    if side == 'left':
         linear_movements(px, 7.5, -25, 1.25)
         linear_movements(px, -7.5, 25, 1.25)
-        linear_movements(px, 7.5, -25, 1.5)
+        linear_movements(px, 7.5, -25, 1.35)
         px.set_dir_servo_angle(0)
         linear_movements(px, 7.5, 0, 1.0)
         
