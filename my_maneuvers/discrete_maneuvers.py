@@ -37,7 +37,7 @@ def k_turn(px, side):
     px.set_dir_servo_angle(0)
     if side == 'left':
         linear_movements(px, 7.5, 25, 1.0)
-        linear_movements(px, -7.5, 25, 1.0)
+        linear_movements(px, -7.5, -25, 1.0)
         linear_movements(px, 7.5, -25, 1.0)
         linear_movements(px, 7.5, 0, 1.0)
         px.set_dir_servo_angle(0)
