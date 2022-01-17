@@ -1,13 +1,9 @@
 import sys
-sys.path.append(r'/home/pi/picar-x/lib')
+sys.path.append(r'/home/ryan/picar-x/lib')
 from utils import reset_mcu
 reset_mcu()
 from grayscale_module import Grayscale_Module
 from picarx import Picarx
-
-
-
-
 
 if __name__=='__main__':
   try:

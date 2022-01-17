@@ -5,21 +5,21 @@ import atexit
 import math
 from logdecorator import log_on_start, log_on_end, log_on_error
 
-# try:
-#     from servo import Servo
-#     from pwm import PWM
-#     from pin import Pin
-#     from adc import ADC
-#     from filedb import fileDB
-#     from utils import reset_mcu
-#     reset_mcu()
-#     time.sleep (0.01)
-
 try:
-    from ezblock import *
-    from ezblock import __reset_mcu__
-    __reset_mcu__ ()
-    time.sleep (0.01)    
+    from servo import Servo
+    from pwm import PWM
+    from pin import Pin
+    from adc import ADC
+    from filedb import fileDB
+    from utils import reset_mcu
+    reset_mcu()
+    time.sleep (0.01)
+
+# try:
+#     from ezblock import *
+#     from ezblock import __reset_mcu__
+#     __reset_mcu__ ()
+#     time.sleep (0.01)    
 
 except ImportError:
     print ("This computer does not appear to be a PiCar -X system (ezblock is not present). Shadowing hardware calls with substitute functions ")
