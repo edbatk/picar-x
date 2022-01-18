@@ -1,7 +1,7 @@
 import sys
 sys.path.append(r'/home/ryan/picar-x/lib')
-import interpreter
-import sensing
+from interpreter import interpreter
+from sensing import sensing
 import numpy as np
 import time
 from picarx_improved import Picarx

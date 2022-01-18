@@ -1,4 +1,4 @@
-import sensing
+from sensing import sensing
 import numpy as np
 import time
 from utils import reset_mcu
