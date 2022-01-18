@@ -78,7 +78,7 @@ class Picarx(object):
             direction = -1 * self.cali_dir_value[motor]
         speed = abs(speed)
         if speed != 0:
-            speed = int(speed /2 ) + 50
+            speed = abs(speed)
         speed = speed - self.cali_speed_value[motor]
         if direction < 0:
             self.motor_direction_pins[motor].high()
@@ -195,7 +195,6 @@ class Picarx(object):
             if abs_current_angle > 40:
                 abs_current_angle = 40
             power_scale = self.power_scale()
-            print(f'power_scale: {power_scale}')
             if (current_angle / abs_current_angle) > 0:
                 self.set_motor_speed(1, speed)
                 self.set_motor_speed(2, -1*speed * power_scale)
