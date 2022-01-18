@@ -19,9 +19,9 @@ class interpreter(object):
         if max_diff > self.brightness:
             rel_dir = np.sign(normalize[0]-normalize[2])
             if self.polarity == 1:
-                error = (max(normalize)-np.mean(normalize))*(0.7)
+                error = -(max(normalize)-np.mean(normalize))*(0.7)
             elif self.polarity == -1:
-                error = (min(normalize)-np.mean(normalize))*(0.7)
+                error = -(min(normalize)-np.mean(normalize))*(0.7)
             print("Error: "+str(error))
             # rel_dir_pol = rel_dir*error*self.polarity
             rel_dir_pol = max_diff*error*self.polarity*rel_dir
