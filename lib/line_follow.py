@@ -16,6 +16,9 @@ if __name__=='__main__':
     polarity = int(input("Please enter polarity (1=light, -1=dark): "))
     # min_speed = float(input("Please enter minimum speed: "))
     # max_speed = float(input("Please enter max speed: "))
+    min_speed = 20
+    max_speed = 50
+    
     sensor = sensing()
     interpreter = interpreter(brightness, polarity)
     controller = line_follow_controller(scaling)
@@ -24,8 +27,7 @@ if __name__=='__main__':
         adc_list = sensor.get_sensing_data()
         direction = interpreter.processing(adc_list)
         set_angle = controller.control(px,direction)
-        # speed = (max_speed - min_speed)*(abs(direction)-1.0)/-0.1
-        speed = 40.0
+        speed = -40*abs(direction) + 50
         px.forward(speed)
        
         
