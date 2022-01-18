@@ -23,6 +23,7 @@ if __name__=='__main__':
         adc_list = sensor.get_sensing_data()
         direction = interpreter.processing(adc_list)
         set_angle = controller.control(px,direction)
-        speed = (max_speed - min_speed)*(abs(direction)-1.0)/-0.1
+        # speed = (max_speed - min_speed)*(abs(direction)-1.0)/-0.1
+        speed = 1.0
         px.forward(speed)
             
