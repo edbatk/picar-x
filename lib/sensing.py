@@ -1,4 +1,5 @@
 from adc import ADC
+import time
 
 class sensing(object):
     def __init__(self):
@@ -12,3 +13,10 @@ class sensing(object):
         adc_value_list.append(self.chn_1.read())
         adc_value_list.append(self.chn_2.read())
         return adc_value_list
+    
+if __name__ =='__main__':
+    sensor = sensing()
+    while True:
+        readings = sensor.get_sensing_data()
+        print(f"Sensor Reading: {readings}")
+        time.sleep(0.25)

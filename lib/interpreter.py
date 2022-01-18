@@ -1,5 +1,4 @@
 import sensing
-from sensing import sensing
 import numpy as np
 import time
 from utils import reset_mcu
@@ -28,4 +27,15 @@ class interpreter(object):
         else:
             rel_dir_pol = 0
             print('Continue Forward')
-        return rel_dir_pol      
+        return rel_dir_pol
+
+if __name__ == '__main__':
+    brightness = float(input("Please enter brightness factor (0-1): "))
+    polarity = int(input("Please enter polarity (1=light, -1=dark): "))
+    sensor = sensing()
+    processor = interpreter(brightness,polarity)
+    while True:
+        reading = sensor.get_sensing_data()
+        relative = processor.processing(reading)
+        print(f"Move Relative: {relative}")
+        time.sleep(0.25)
