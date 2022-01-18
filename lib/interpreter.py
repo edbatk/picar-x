@@ -1,5 +1,5 @@
 import sensing
-from sensing import get_sensing_data
+from sensing import sensing
 import numpy as np
 import time
 from utils import reset_mcu
