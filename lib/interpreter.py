@@ -13,6 +13,7 @@ class interpreter(object):
             
     def processing(self, adc_list):
         normalize = [float(i)/max(adc_list) for i in adc_list]
+        print(f"Normalized Readings: {normalize}")
         max_diff = max(normalize)-min(normalize)
         print(f'Max Diff: {max_diff}')
         if max_diff > self.brightness:
