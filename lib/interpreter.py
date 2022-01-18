@@ -15,6 +15,7 @@ class interpreter(object):
     def processing(self, adc_list):
         normalize = [float(i)/max(adc_list) for i in adc_list]
         max_diff = max(normalize)-min(normalize)
+        print(f'Max Diff: {max_diff}')
         if max_diff > self.brightness:
             rel_dir = normalize[0]-normalize[2]
             print("Relative Direction: "+str(rel_dir))
