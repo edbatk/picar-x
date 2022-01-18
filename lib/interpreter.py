@@ -29,6 +29,7 @@ class interpreter(object):
         else:
             rel_dir_pol = 0
             print('Continue Forward')
+        print(f"Direction: {rel_dir_pol}")
         return rel_dir_pol
 
 if __name__ == '__main__':
