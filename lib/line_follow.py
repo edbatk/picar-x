@@ -25,7 +25,7 @@ if __name__=='__main__':
         direction = interpreter.processing(adc_list)
         set_angle = controller.control(px,direction)
         # speed = (max_speed - min_speed)*(abs(direction)-1.0)/-0.1
-        speed = 1.0
+        speed = 0.5
         # px.forward(speed)
         time.sleep(0.1)
         
