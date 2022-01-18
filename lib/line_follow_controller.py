@@ -13,9 +13,6 @@ class line_follow_controller(object):
     def control(self,px,direction):
         angle = direction * self.scaling
         px.set_dir_servo_angle(angle)
-        
-if __name__ == '__main__':
-    while True:
-        break
+        return angle
     
         

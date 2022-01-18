@@ -26,7 +26,7 @@ if __name__=='__main__':
         set_angle = controller.control(px,direction)
         # speed = (max_speed - min_speed)*(abs(direction)-1.0)/-0.1
         speed = 0.5
-        px.forward(speed)
+        # px.forward(speed)
        
         
             

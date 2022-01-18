@@ -19,20 +19,12 @@ class interpreter(object):
             rel_dir = normalize[0]-normalize[2]
             print("Relative Direction: "+str(rel_dir))
             if self.polarity == 1:
-                error = (max(normalize)-np.mean(normalize))*(2/3)
+                error = (max(normalize)-np.mean(normalize))*(0.7)
             elif self.polarity == -1:
-                error = (min(normalize)-np.mean(normalize))*(2/3)
+                error = (min(normalize)-np.mean(normalize))*(0.7)
             print("Error: "+str(error))
             rel_dir_pol = rel_dir*error*self.polarity
         else:
             rel_dir_pol = 0
-
-        return rel_dir_pol
-
-        
-if __name__ == '__main__':
-    sens = sensing()
-    interpretor = interpreter(0.0, -1)
-
-    while True:
-        break           
+            print('Continue Forward')
+        return rel_dir_pol      
