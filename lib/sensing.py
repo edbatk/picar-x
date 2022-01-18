@@ -1,5 +1,9 @@
+import sys
+sys.path.append(r'/home/ryan/picar-x/lib')
 from adc import ADC
 import time
+from utils import reset_mcu
+reset_mcu()
 
 class sensing(object):
     def __init__(self):

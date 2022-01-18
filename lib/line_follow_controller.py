@@ -1,3 +1,5 @@
+import sys
+sys.path.append(r'/home/ryan/picar-x/lib')
 import interpreter
 import sensing
 import numpy as np
