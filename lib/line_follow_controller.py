@@ -1,4 +1,4 @@
-import interpretor
+import interpreter
 import numpy as np
 import time
 from picarx_improved import Picarx
