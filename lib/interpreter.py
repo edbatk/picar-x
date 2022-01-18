@@ -22,6 +22,8 @@ class interpreter(object):
                 error = -(max(normalize)-np.mean(normalize))*(0.7)
             elif self.polarity == -1:
                 error = -(min(normalize)-np.mean(normalize))*(0.7)
+            if error < 0:
+                error = error*2.5
             print("Error: "+str(error))
             # rel_dir_pol = rel_dir*error*self.polarity
             rel_dir_pol = max_diff*error*self.polarity*rel_dir
