@@ -19,7 +19,7 @@ if __name__=='__main__':
     controller = line_follow_controller(scaling)
       
     while True:
-        adc_list = sensing.get_sensing_data()
+        adc_list = sensor.get_sensing_data()
         direction = interpreter.processing(adc_list)
         set_angle = controller.control(direction)
         speed = (max_speed - min_speed)*(abs(direction)-1.00001)/-0.00001
