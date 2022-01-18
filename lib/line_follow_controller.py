@@ -27,6 +27,7 @@ if __name__ == '__main__':
     controller = line_follow_controller()
     while True:
         adc_list = sensor.get_sensing_data()
+        print(f"READING: {adc_list}")
         direction = interpreter.processing(adc_list)
         set_angle = controller.control(px,direction)
         print(f"Angle: {set_angle}")
