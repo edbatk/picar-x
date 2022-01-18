@@ -17,15 +17,14 @@ class interpreter(object):
         max_diff = max(normalize)-min(normalize)
         print(f'Max Diff: {max_diff}')
         if max_diff > self.brightness:
-            # rel_dir = normalize[0]-normalize[2]
-            # print("Relative Direction: "+str(rel_dir))
+            rel_dir = np.sign(normalize[0]-normalize[2])
             if self.polarity == 1:
                 error = (max(normalize)-np.mean(normalize))*(0.7)
             elif self.polarity == -1:
                 error = (min(normalize)-np.mean(normalize))*(0.7)
             print("Error: "+str(error))
             # rel_dir_pol = rel_dir*error*self.polarity
-            rel_dir_pol = max_diff*error*self.polarity
+            rel_dir_pol = max_diff*error*self.polarity*rel_dir
         else:
             rel_dir_pol = 0
             print('Continue Forward')
