@@ -19,7 +19,7 @@ if __name__=='__main__':
     sensor = sensing()
     interpreter = interpreter(brightness, polarity)
     controller = line_follow_controller(scaling)
-      
+    time.sleep(2.0)  
     while True:
         adc_list = sensor.get_sensing_data()
         direction = interpreter.processing(adc_list)
