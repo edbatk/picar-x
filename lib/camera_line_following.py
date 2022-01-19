@@ -285,6 +285,7 @@ class HandCodedLaneFollower(object):
 
         if self.car is not None:
             self.px.set_dir_servo_angle(self.curr_steering_angle)
+            self.forward(30)
         curr_heading_image = display_heading_line(frame, self.curr_steering_angle)
         show_image("heading", curr_heading_image)
 
@@ -304,3 +305,10 @@ if __name__ == '__main__':
     for frame in camera.capture_continuous(rawCapture, format="bgr",use_video_port=True): # use_video_port=True
         img = frame.array
         lane_follower.follow_lane(img)
+        rawCapture.truncate(0)  # Release cache
+    
+        # click ESC key to exit.
+        k = cv2.waitKey(1) & 0xFF
+        if k == 27:
+            camera.close()
+            break
