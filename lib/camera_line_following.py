@@ -17,18 +17,18 @@ reset_mcu()
 def detect_lane(frame):
 
     edges = detect_edges(frame)
-    show_image('edges', edges)
+    show_image('edges', edges, False)
 
     cropped_edges = region_of_interest(edges)
-    show_image('edges cropped', cropped_edges)
+    show_image('edges cropped', cropped_edges, False)
 
     line_segments = detect_line_segments(cropped_edges)
     line_segment_image = display_lines(frame, line_segments)
-    show_image("line segments", line_segment_image)
+    show_image("line segments", line_segment_image, False)
 
     lane_lines = average_slope_intercept(frame, line_segments)
     lane_lines_image = display_lines(frame, lane_lines)
-    show_image("lane lines", lane_lines_image)
+    show_image("lane lines", lane_lines_image, True)
 
     return lane_lines, lane_lines_image
 
@@ -36,11 +36,11 @@ def detect_lane(frame):
 def detect_edges(frame):
     # filter for blue lane lines
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    show_image("hsv", hsv)
+    show_image("hsv", hsv, False)
     lower_blue = np.array([30, 40, 0])
     upper_blue = np.array([150, 255, 255])
     mask = cv2.inRange(hsv, lower_blue, upper_blue)
-    show_image("blue mask", mask)
+    show_image("blue mask", mask, False)
 
     # detect edges
     edges = cv2.Canny(mask, 200, 400)
@@ -62,7 +62,7 @@ def region_of_interest(canny):
     ]], np.int32)
 
     cv2.fillPoly(mask, polygon, 255)
-    show_image("mask", mask)
+    show_image("mask", mask, True)
     masked_image = cv2.bitwise_and(canny, mask)
     return masked_image
 
@@ -238,7 +238,7 @@ class HandCodedLaneFollower(object):
 
     def follow_lane(self, frame):
         # Main entry point of the lane follower
-        show_image("orig", frame)
+        show_image("orig", frame, True)
 
         lane_lines, frame = detect_lane(frame)
         final_frame = self.steer(frame, lane_lines)
@@ -255,7 +255,7 @@ class HandCodedLaneFollower(object):
         if self.car is not None:
             self.car.front_wheels.turn(self.curr_steering_angle)
         curr_heading_image = display_heading_line(frame, self.curr_steering_angle)
-        show_image("heading", curr_heading_image)
+        show_image("heading", curr_heading_image, True)
 
         return curr_heading_image
 
@@ -269,7 +269,7 @@ class HandCodedLaneFollower(object):
 
     def follow_lane(self, frame):
         # Main entry point of the lane follower
-        show_image("orig", frame)
+        show_image("orig", frame, True)
 
         lane_lines, frame = detect_lane(frame)
         final_frame = self.steer(frame, lane_lines)
@@ -287,7 +287,7 @@ class HandCodedLaneFollower(object):
             self.px.set_dir_servo_angle(self.curr_steering_angle)
             self.forward(30)
         curr_heading_image = display_heading_line(frame, self.curr_steering_angle)
-        show_image("heading", curr_heading_image)
+        show_image("heading", curr_heading_image, True)
 
         return curr_heading_image
 
