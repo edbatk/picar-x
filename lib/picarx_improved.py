@@ -210,7 +210,9 @@ class Picarx(object):
         self.set_motor_speed(2, 0)
         
     def cleanup(self):
-        self.stop()
+        self.set_motor_speed(1, 0)
+        self.set_motor_speed(2, 0)
+        # self.stop()
 
 
     def Get_distance(self):
