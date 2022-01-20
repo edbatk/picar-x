@@ -35,7 +35,7 @@ class Picarx(object):
     TIMEOUT = 0.02
 
     def __init__(self):
-        # atexit.register(self.cleanup)
+        atexit.register(self.cleanup)
         self.dir_servo_pin = Servo(PWM('P2'))
         self.camera_servo_pin1 = Servo(PWM('P0'))
         self.camera_servo_pin2 = Servo(PWM('P1'))
