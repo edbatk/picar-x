@@ -230,34 +230,34 @@ def show_image(title, frame, show):
         cv2.imshow(title, frame)
 
 
-class HandCodedLaneFollower(object):
+# class HandCodedLaneFollower(object):
 
-    def __init__(self, car=None):
-        self.car = car
-        self.curr_steering_angle = 90
+#     def __init__(self, car=None):
+#         self.car = car
+#         self.curr_steering_angle = 90
 
-    def follow_lane(self, frame):
-        # Main entry point of the lane follower
-        show_image("orig", frame, True)
+#     def follow_lane(self, frame):
+#         # Main entry point of the lane follower
+#         show_image("orig", frame, True)
 
-        lane_lines, frame = detect_lane(frame)
-        final_frame = self.steer(frame, lane_lines)
+#         lane_lines, frame = detect_lane(frame)
+#         final_frame = self.steer(frame, lane_lines)
 
-        return final_frame
+#         return final_frame
 
-    def steer(self, frame, lane_lines):
-        if len(lane_lines) == 0:
-            return frame
+#     def steer(self, frame, lane_lines):
+#         if len(lane_lines) == 0:
+#             return frame
 
-        new_steering_angle = compute_steering_angle(frame, lane_lines)
-        self.curr_steering_angle = stabilize_steering_angle(self.curr_steering_angle, new_steering_angle, len(lane_lines))
+#         new_steering_angle = compute_steering_angle(frame, lane_lines)
+#         self.curr_steering_angle = stabilize_steering_angle(self.curr_steering_angle, new_steering_angle, len(lane_lines))
 
-        if self.car is not None:
-            self.car.front_wheels.turn(self.curr_steering_angle)
-        curr_heading_image = display_heading_line(frame, self.curr_steering_angle)
-        show_image("heading", curr_heading_image, True)
+#         if self.car is not None:
+#             self.car.front_wheels.turn(self.curr_steering_angle)
+#         curr_heading_image = display_heading_line(frame, self.curr_steering_angle)
+#         show_image("heading", curr_heading_image, True)
 
-        return curr_heading_image
+#         return curr_heading_image
 
 
 class HandCodedLaneFollower(object):
@@ -266,6 +266,8 @@ class HandCodedLaneFollower(object):
         self.px = px
         self.curr_steering_angle = 0
         self.px.set_dir_servo_angle(0)
+        self.px.camera_servo1_angle_calibration(-15)
+        time.sleep(0.25)
 
     def follow_lane(self, frame):
         # Main entry point of the lane follower
