@@ -200,7 +200,7 @@ def display_heading_line(frame, steering_angle, line_color=(0, 0, 255), line_wid
     steering_angle_radian = steering_angle / 180.0 * math.pi
     x1 = int(width / 2)
     y1 = height
-    x2 = int(x1 - height / 2 / math.tan(steering_angle_radian))
+    x2 = int(x1 - height / 2 / math.tan(steering_angle_radian + 0.00001))
     y2 = int(height / 2)
 
     cv2.line(heading_image, (x1, y1), (x2, y2), line_color, line_width)
