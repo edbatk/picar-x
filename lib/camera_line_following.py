@@ -17,14 +17,14 @@ reset_mcu()
 def detect_lane(frame):
 
     edges = detect_edges(frame)
-    show_image('edges', edges, False)
+    show_image('edges', edges, True)
 
     cropped_edges = region_of_interest(edges)
-    show_image('edges cropped', cropped_edges, False)
+    show_image('edges cropped', cropped_edges, True)
 
     line_segments = detect_line_segments(cropped_edges)
     line_segment_image = display_lines(frame, line_segments)
-    show_image("line segments", line_segment_image, False)
+    show_image("line segments", line_segment_image, True)
 
     lane_lines = average_slope_intercept(frame, line_segments)
     lane_lines_image = display_lines(frame, lane_lines)
@@ -36,11 +36,11 @@ def detect_lane(frame):
 def detect_edges(frame):
     # filter for blue lane lines
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    show_image("hsv", hsv, False)
+    show_image("hsv", hsv, True)
     lower_blue = np.array([30, 40, 0])
     upper_blue = np.array([150, 255, 255])
     mask = cv2.inRange(hsv, lower_blue, upper_blue)
-    show_image("blue mask", mask, False)
+    show_image("blue mask", mask, True)
 
     # detect edges
     edges = cv2.Canny(mask, 200, 400)
