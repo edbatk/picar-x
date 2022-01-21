@@ -37,7 +37,7 @@ def detect_edges(frame):
     # filter for blue lane lines
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     show_image("hsv", hsv, True)
-    lower_blue = np.array([30, 40, 0])
+    lower_blue = np.array([90, 40, 0])
     upper_blue = np.array([150, 255, 255])
     mask = cv2.inRange(hsv, lower_blue, upper_blue)
     show_image("blue mask", mask, True)
@@ -54,11 +54,18 @@ def region_of_interest(canny):
 
     # only focus bottom half of the screen
 
+    # polygon = np.array([[
+    #     (0, height * 1 / 2),
+    #     (width, height * 1 / 2),
+    #     (width, height),
+    #     (0, height),
+    # ]], np.int32)
+    
     polygon = np.array([[
-        (0, height * 1 / 2),
+        (0, 0),
         (width, height * 1 / 2),
         (width, height),
-        (0, height),
+        (0, height * 1 / 2),
     ]], np.int32)
 
     cv2.fillPoly(mask, polygon, 255)
@@ -126,7 +133,7 @@ def compute_steering_angle(frame, lane_lines):
         We assume that camera is calibrated to point to dead center
     """
     if len(lane_lines) == 0:
-        return 0
+        return -90
 
     height, width, _ = frame.shape
     if len(lane_lines) == 1:
@@ -144,7 +151,7 @@ def compute_steering_angle(frame, lane_lines):
 
     angle_to_mid_radian = math.atan(x_offset / y_offset)  # angle (in radian) to center vertical line
     angle_to_mid_deg = int(angle_to_mid_radian * 180.0 / math.pi)  # angle (in degrees) to center vertical line
-    steering_angle = angle_to_mid_deg  # this is the steering angle needed by picar front wheel
+    steering_angle = angle_to_mid_deg + 90 # this is the steering angle needed by picar front wheel
 
     return steering_angle
 
