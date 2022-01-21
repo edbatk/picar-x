@@ -54,19 +54,19 @@ def region_of_interest(canny):
 
     # only focus bottom half of the screen
 
-    # polygon = np.array([[
-    #     (0, height * 1 / 2),
-    #     (width, height * 1 / 2),
-    #     (width, height),
-    #     (0, height),
-    # ]], np.int32)
-    
     polygon = np.array([[
-        (0, 0),
+        (0, height * 1 / 2),
         (width, height * 1 / 2),
         (width, height),
-        (0, height * 1 / 2),
+        (0, height),
     ]], np.int32)
+    
+    # polygon = np.array([[
+    #     (0, 0),
+    #     (width, height * 1 / 2),
+    #     (width, height),
+    #     (0, height * 1 / 2),
+    # ]], np.int32)
 
     cv2.fillPoly(mask, polygon, 255)
     show_image("mask", mask, False)
