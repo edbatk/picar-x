@@ -273,8 +273,8 @@ class HandCodedLaneFollower(object):
         self.px = px
         self.curr_steering_angle = 0
         self.px.set_dir_servo_angle(0)
-        self.px.camera_servo1_angle_calibration(-10)
-        self.px.camera_servo2_angle_calibration(30)
+        self.px.camera_servo1_angle_calibration(-19)
+        self.px.camera_servo2_angle_calibration(10)
         time.sleep(0.25)
 
     def follow_lane(self, frame):
