@@ -296,7 +296,7 @@ class HandCodedLaneFollower(object):
         print(f"Steering Angle: {self.curr_steering_angle}")
         
         if self.px is not None:
-            self.px.set_dir_servo_angle(self.curr_steering_angle + 90)
+            self.px.set_dir_servo_angle(-self.curr_steering_angle - 90)
             self.px.forward(25)
         curr_heading_image = display_heading_line(frame, self.curr_steering_angle)
         show_image("heading", curr_heading_image, True)

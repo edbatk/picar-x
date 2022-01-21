@@ -109,7 +109,7 @@ class Picarx(object):
     def dir_servo_angle_calibration(self,value):
         # global dir_cal_value
         self.dir_cal_value = value
-        print("calibrationdir_cal_value:",self.dir_cal_value)
+        # print("calibrationdir_cal_value:",self.dir_cal_value)
         self.config_flie.set("picarx_dir_servo", "%s"%value)
         self.dir_servo_pin.angle(value)
 
@@ -117,7 +117,7 @@ class Picarx(object):
         # global dir_cal_value
         self.dir_current_angle = value
         angle_value  = value + self.dir_cal_value
-        print("angle_value:",angle_value)
+        # print("angle_value:",angle_value)
         # print("set_dir_servo_angle_1:",angle_value)
         # print("set_dir_servo_angle_2:",dir_cal_value)
         self.dir_servo_pin.angle(angle_value)
@@ -126,27 +126,27 @@ class Picarx(object):
         # global cam_cal_value_1
         self.cam_cal_value_1 = value
         self.config_flie.set("picarx_cam1_servo", "%s"%value)
-        print("cam_cal_value_1:",self.cam_cal_value_1)
+        # print("cam_cal_value_1:",self.cam_cal_value_1)
         self.camera_servo_pin1.angle(value)
 
     def camera_servo2_angle_calibration(self,value):
         # global cam_cal_value_2
         self.cam_cal_value_2 = value
         self.config_flie.set("picarx_cam2_servo", "%s"%value)
-        print("picarx_cam2_servo:",self.cam_cal_value_2)
+        # print("picarx_cam2_servo:",self.cam_cal_value_2)
         self.camera_servo_pin2.angle(value)
 
     def set_camera_servo1_angle(self,value):
         # global cam_cal_value_1
         self.camera_servo_pin1.angle(-1*(value + -1*self.cam_cal_value_1))
         # print("self.cam_cal_value_1:",self.cam_cal_value_1)
-        print((value + self.cam_cal_value_1))
+        # print((value + self.cam_cal_value_1))
 
     def set_camera_servo2_angle(self,value):
         # global cam_cal_value_2
         self.camera_servo_pin2.angle(-1*(value + -1*self.cam_cal_value_2))
         # print("self.cam_cal_value_2:",self.cam_cal_value_2)
-        print((value + self.cam_cal_value_2))
+        # print((value + self.cam_cal_value_2))
 
     def get_adc_value(self):
         adc_value_list = []
@@ -161,12 +161,12 @@ class Picarx(object):
         
     def power_scale(self):
         curr_angle = abs(math.radians(self.dir_current_angle))
-        print(curr_angle)
+        # print(curr_angle)
         length = 96 # [mm]
         width = 110 # [mm]
         scaling = ((length - width/2 * math.tan(curr_angle)) / 
                   (length + width/2 * math.tan(curr_angle)))
-        print(f'Scaling: {scaling}')
+        # print(f'Scaling: {scaling}')
         return scaling
 
     def backward(self,speed):
