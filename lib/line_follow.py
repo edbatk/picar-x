@@ -9,9 +9,6 @@ from interpreter import interpreter
 from line_follow_controller import line_follow_controller
 from picarx_improved import Picarx
 
-import concurrent.futures
-import message_bus
-
 if __name__=='__main__':
     px = Picarx()
     scaling = int(input("Please enter scaling (default 80): "))
