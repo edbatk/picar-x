@@ -5,6 +5,8 @@ from utils import reset_mcu
 import sys
 sys.path.append(r'/home/ryan/picar-x/lib')
 reset_mcu()
+from data_bus import message_bus
+import concurrent.futures
 
 class interpreter(object):
     def __init__(self,brightness=0.0,polarity=1):
@@ -32,6 +34,13 @@ class interpreter(object):
             print('Continue Forward')
         print(f"Direction: {rel_dir_pol}")
         return rel_dir_pol
+    
+    def consumer_producer(self,in_bus,out_bus,delay): 
+        while True:
+            sensor_info = in_bus.read()
+            process = self.processing(sensor_info)
+            out_bus.write(process)
+            time.sleep(delay)
 
 if __name__ == '__main__':
     brightness = float(input("Please enter brightness factor (0-1): "))

@@ -5,18 +5,27 @@ from sensing import sensing
 import numpy as np
 import time
 from picarx_improved import Picarx
-
 from utils import reset_mcu
 reset_mcu()
+from data_bus import message_bus
 
 class line_follow_controller(object):
-    def __init__(self,scaling=80):
+    def __init__(self,picarx,scaling=80):
+        self.px = picarx
         self.scaling=scaling
         
-    def control(self,px,direction):
+    def control(self,direction):
         angle = direction * self.scaling
-        px.set_dir_servo_angle(angle)
+        self.px.set_dir_servo_angle(angle)
+        speed = -40*abs(direction) + 50
+        self.px.forward(speed)
         return angle
+    
+    def consumer(self,message_bus,delay):
+        while True:
+            message = message_bus.read()
+            self.control(message)
+            time.sleep(delay)
     
 if __name__ == '__main__':
     px = Picarx()
@@ -24,7 +33,7 @@ if __name__ == '__main__':
     polarity = int(input("Please enter polarity (1=light, -1=dark): "))
     sensor = sensing()
     processor = interpreter(brightness,polarity)
-    controller = line_follow_controller()
+    controller = line_follow_controller(px)
     while True:
         adc_list = sensor.get_sensing_data()
         print(f"READING: {adc_list}")

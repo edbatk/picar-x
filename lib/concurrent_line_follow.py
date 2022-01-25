@@ -21,11 +21,16 @@ if __name__=='__main__':
     sensor = sensing()
     interpreter = interpreter(brightness, polarity)
     controller = line_follow_controller(px,scaling)
+    sensor_bus = message_bus()
+    interpreter_bus = message_bus()
+    
     time.sleep(2.0)  
-    while True:
-        adc_list = sensor.get_sensing_data()
-        direction = interpreter.processing(adc_list)
-        set_angle = controller.control(direction)
-       
-        
-            
+    
+    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+        eSensor = executor.submut(sensor.producer, sensor_bus, 0.1)
+        eInterpretor = executor.submit(interpreter.consumer_producer(sensor_bus, interpreter_bus, 0.1))
+        eController = executor.submit(controller.consumer(interpreter_bus, 0.1))
+
+    eSensor.result()
+    eInterpretor.result()
+    eController.result()

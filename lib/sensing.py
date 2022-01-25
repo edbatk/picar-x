@@ -4,6 +4,7 @@ from adc import ADC
 import time
 from utils import reset_mcu
 reset_mcu()
+from data_bus import message_bus
 
 class sensing(object):
     def __init__(self):
@@ -17,6 +18,12 @@ class sensing(object):
         adc_value_list.append(self.chn_1.read())
         adc_value_list.append(self.chn_2.read())
         return adc_value_list
+    
+    def producer(self,message_bus,delay):
+        while True:
+            data = self.get_sensing_data()
+            message_bus.write(data)
+            time.sleep(delay)
     
 if __name__ =='__main__':
     sensor = sensing()
