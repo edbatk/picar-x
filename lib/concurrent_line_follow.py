@@ -10,7 +10,7 @@ from line_follow_controller import line_follow_controller
 from picarx_improved import Picarx
 
 import concurrent.futures
-import message_bus
+import data_bus
 
 if __name__=='__main__':
     px = Picarx()
@@ -21,8 +21,8 @@ if __name__=='__main__':
     sensor = sensing()
     interpreter = interpreter(brightness, polarity)
     controller = line_follow_controller(px,scaling)
-    sensor_bus = message_bus()
-    interpreter_bus = message_bus()
+    sensor_bus = data_bus()
+    interpreter_bus = data_bus()
     
     time.sleep(2.0)  
     
