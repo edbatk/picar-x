@@ -23,8 +23,7 @@ if __name__=='__main__':
     controller = line_follow_controller(px,scaling)
     sensor_bus = message_bus()
     interpreter_bus = message_bus()
-    
-    time.sleep(2.0)  
+     
     
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
         eSensor = executor.submit(sensor.producer, sensor_bus, 0.5)
