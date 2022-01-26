@@ -37,6 +37,7 @@ class interpreter(object):
     
     def consumer_producer(self,in_bus,out_bus,delay): 
         while True:
+            print("CONSUMING PRODUCING")
             sensor_info = in_bus.read()
             process = self.processing(sensor_info)
             out_bus.write(process)

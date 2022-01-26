@@ -21,6 +21,7 @@ class sensing(object):
     
     def producer(self,message_bus,delay):
         while True:
+            print("PRODUCING")
             data = self.get_sensing_data()
             message_bus.write(data)
             time.sleep(delay)

@@ -23,6 +23,7 @@ class line_follow_controller(object):
     
     def consumer(self,message_bus,delay):
         while True:
+            print("CONSUMING")
             message = message_bus.read()
             self.control(message)
             time.sleep(delay)
