@@ -26,9 +26,9 @@ if __name__=='__main__':
      
     
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
-        eSensor = executor.submit(sensor.producer, sensor_bus, 0.5)
-        eInterpretor = executor.submit(interpreter.consumer_producer, sensor_bus,interpreter_bus, 0.5)
-        eController = executor.submit(controller.consumer, interpreter_bus, 0.5)
+        eSensor = executor.submit(sensor.producer, sensor_bus, 0.01)
+        eInterpretor = executor.submit(interpreter.consumer_producer, sensor_bus,interpreter_bus, 0.01)
+        eController = executor.submit(controller.consumer, interpreter_bus, 0.01)
 
     eSensor.result()
     eInterpretor.result()
