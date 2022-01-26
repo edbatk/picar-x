@@ -14,6 +14,7 @@ class interpreter(object):
         self.polarity = polarity
             
     def processing(self, adc_list):
+        print('PROCESSING')
         normalize = [float(i)/max(adc_list) for i in adc_list]
         print(f"Normalized Readings: {normalize}")
         max_diff = max(normalize)-min(normalize)

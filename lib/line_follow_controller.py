@@ -15,6 +15,7 @@ class line_follow_controller(object):
         self.scaling=scaling
         
     def control(self,direction):
+        print("Controlling")
         angle = direction * self.scaling
         self.px.set_dir_servo_angle(angle)
         speed = -40*abs(direction) + 50
@@ -38,6 +39,7 @@ if __name__ == '__main__':
     while True:
         adc_list = sensor.get_sensing_data()
         print(f"READING: {adc_list}")
+        print('HERE')
         direction = processor.processing(adc_list)
         set_angle = controller.control(px,direction)
         print(f"Angle: {set_angle}")
