@@ -9,36 +9,67 @@ from data_bus import message_bus
 import concurrent.futures
 
 class interpreter(object):
+    """
+    A class for interpretating of sensor readings
+    that converts to useable directional headings
+    based upon line following
+    
+    ...
+    
+    Attributes
+    ----------
+    brightness : float (0.0-1.0)
+        scaling for sensitivity of sensor readings
+    polarity : int (-1 or 1)
+        checking against light or dark background
+    
+    """
     def __init__(self,brightness=0.0,polarity=1):
+        """
+        Parameters
+        ----------
+        brightness : float (0.0-1.0)
+            scaling for sensitivity of sensor readings
+        polarity : int (-1 or 1)
+            checking against light or dark background
+      
+        """
         self.brightness = brightness
         self.polarity = polarity
             
     def processing(self, adc_list):
-        print('PROCESSING')
-        normalize = [float(i)/max(adc_list) for i in adc_list]
-        print(f"Normalized Readings: {normalize}")
+        """
+        Method for processing sensor information, returns
+        direction of heading
+        """
+        # print('PROCESSING')
+        normalize = [float(i)/max(adc_list) for i in adc_list] # normalize sensor readings
+        # print(f"Normalized Readings: {normalize}")
         max_diff = max(normalize)-min(normalize)
-        print(f'Max Diff: {max_diff}')
-        if max_diff > self.brightness:
+        # print(f'Max Diff: {max_diff}')
+        if max_diff > self.brightness: # if difference exceeds brightness sensitivity
             rel_dir = np.sign(normalize[0]-normalize[2])
             if self.polarity == 1:
-                error = -(max(normalize)-np.mean(normalize))*(0.7)
+                error = -(max(normalize)-np.mean(normalize))*(0.7) # scaled error direction
             elif self.polarity == -1:
-                error = -(min(normalize)-np.mean(normalize))*(0.7)
+                error = -(min(normalize)-np.mean(normalize))*(0.7) # scaled error direction
             if error < 0:
                 error = error*2.5
-            print("Error: "+str(error))
+            # print("Error: "+str(error))
             # rel_dir_pol = rel_dir*error*self.polarity
             rel_dir_pol = max_diff*error*self.polarity*rel_dir
         else:
             rel_dir_pol = 0
-            print('Continue Forward')
-        print(f"Direction: {rel_dir_pol}")
+            # print('Continue Forward')
+        # print(f"Direction: {rel_dir_pol}")
         return rel_dir_pol
     
     def consumer_producer(self,in_bus,out_bus,delay): 
+        """
+        Method for writing to and reading from buses
+        """
         while True:
-            print("CONSUMING PRODUCING")
+            # print("CONSUMING PRODUCING")
             sensor_info = in_bus.read()
             process = self.processing(sensor_info)
             out_bus.write(process)

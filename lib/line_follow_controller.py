@@ -10,11 +10,39 @@ reset_mcu()
 from data_bus import message_bus
 
 class line_follow_controller(object):
+    """
+    A class that controls motors based upon
+    interpreted sensor information
+    
+    ...
+    
+    Attributes
+    ----------
+    px : Picarx
+        picar object
+    scaling : float
+        scaling factor to increase motor movements
+    
+    """
     def __init__(self,picarx,scaling=80):
+        """
+        Parameters
+        ----------
+        px : Picarx
+            picar object
+        scaling : float
+            scaling factor to increase motor movements
+        
+        """
+        
         self.px = picarx
         self.scaling=scaling
         
     def control(self,direction):
+        """
+        Set motor speed and direction based on
+        interpreted sensor direction
+        """
         print("Controlling")
         angle = direction * self.scaling
         self.px.set_dir_servo_angle(angle)
@@ -23,6 +51,9 @@ class line_follow_controller(object):
         return angle
     
     def consumer(self,message_bus,delay):
+        """
+        Read message from data bus
+        """
         while True:
             print("CONSUMING")
             message = message_bus.read()

@@ -307,7 +307,6 @@ class HandCodedLaneFollower(object):
 if __name__ == '__main__':
     px = Picarx()
     lane_follower = HandCodedLaneFollower(px)
-    print('Hey Now')
     
     camera = PiCamera()
     camera.resolution = (640,480)
