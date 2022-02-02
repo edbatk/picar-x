@@ -43,7 +43,7 @@ class line_follow_controller(object):
         Set motor speed and direction based on
         interpreted sensor direction
         """
-        print("Controlling")
+        # print("Controlling")
         angle = direction * self.scaling
         self.px.set_dir_servo_angle(angle)
         speed = -40*abs(direction) + 50
@@ -55,7 +55,7 @@ class line_follow_controller(object):
         Read message from data bus
         """
         while True:
-            print("CONSUMING")
+            # print("CONSUMING")
             message = message_bus.read()
             self.control(message)
             time.sleep(delay)

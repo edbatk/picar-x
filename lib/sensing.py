@@ -50,7 +50,7 @@ class sensing(object):
         on a delay timer
         """
         while True:
-            print("PRODUCING")
+            # print("PRODUCING")
             data = self.get_sensing_data()
             message_bus.write(data)
             time.sleep(delay)
