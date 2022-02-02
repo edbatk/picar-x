@@ -36,7 +36,7 @@ if __name__=='__main__':
     wrapped_sensor = Producer(sensor.get_sensing_data,sensor_bus,s_delay,termination_bus,'sensor')
     wrapped_interpreter = ConsumerProducer(interpretor.processing,sensor_bus,interpreter_bus,i_delay,termination_bus,'interpreter')
     wrapped_controller = Consumer(controller.control,interpreter_bus,c_delay,termination_bus,'controller')
-    timer = Timer(termination_bus, 5, t_delay, 'termination timer')
+    timer = Timer(termination_bus, 3, t_delay, termination_bus, 'termination timer')
     
      
     
