@@ -54,7 +54,7 @@ if __name__=='__main__':
     wrapped_controller = Consumer(controller.control,interpreter_bus,c_delay,termination_bus,'controller')
     wrapped_ultra_sensor = Producer(ultra_sensor.read,ultra_sensor_bus,us_delay,termination_bus,'ultra sensor')
     wrapped_ultra_interpreter = ConsumerProducer(ultra_interpreter.processing,ultra_sensor_bus,ultra_interpreter_bus,ui_delay,termination_bus,'ultra interpreter')
-    wrapped_ultra_controller = Consumer(ultra_controller.control, [ultra_interpreter_bus,interpreter_bus],uc_delay,termination_bus,'ultra controller')
+    wrapped_ultra_controller = Consumer(ultra_controller.control, (ultra_interpreter_bus,interpreter_bus),uc_delay,termination_bus,'ultra controller')
     timer = Timer(termination_bus, 3, t_delay, termination_bus, 'termination timer')
     
      

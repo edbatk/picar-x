@@ -43,11 +43,13 @@ class ultrasonic_controller(object):
         """
         # print("Controlling")
         if command == 1:
+            print('STOPPING')
             self.px.stop()
         elif command == -1:
+            print('GOING')
             speed = -40*abs(direction) + 50
             self.px.forward(speed)
-        return speed
+        return 1
     
     def consumer(self,message_bus,delay):
         """
